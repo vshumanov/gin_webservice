@@ -1,0 +1,134 @@
+definitions:
+  models.User:
+    properties:
+      email:
+        type: string
+      f_name:
+        type: string
+      id:
+        type: integer
+      l_name:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Simplest User API.
+  title: User API
+paths:
+  /users/user/:
+    delete:
+      consumes:
+      - application/json
+      description: delete an existing user by id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+        "404":
+          description: Not Found
+          schema:
+            type: integer
+      summary: delete user
+      tags:
+      - user
+    get:
+      description: list all the users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+      summary: List  all users
+      tags:
+      - user
+    post:
+      consumes:
+      - application/json
+      description: create a new user
+      parameters:
+      - description: user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+        "404":
+          description: Not Found
+          schema:
+            type: int
+      summary: create user
+      tags:
+      - user
+    put:
+      consumes:
+      - application/json
+      description: update an existing user
+      parameters:
+      - description: user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+        "404":
+          description: Not Found
+          schema:
+            type: int
+      summary: update a user
+      tags:
+      - user
+  /users/user/{id}:
+    get:
+      description: get single user
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Get single user by given id
+      tags:
+      - user
+schemes:
+- http
+swagger: "2.0"
